@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicketMaster Blaster</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="score">Score: 0</div>
+        
+        <!-- Start Screen -->
+        <div id="startScreen">
+            <h1>TicketMaster Blaster</h1>
+            <button id="startButton">Start Game</button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOver" class="hidden">
+            Game Over!<br>
+            Final Score: <span id="finalScore">0</span><br>
+            <button id="playAgainButton">Play Again</button>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div id="mobileControls" class="hidden">
+            <button id="shootButton">Shoot</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 
