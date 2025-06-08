@@ -11,6 +11,7 @@ const ENEMY_ROWS = 3;
 const ENEMIES_PER_ROW = 6;
 const ENEMY_SPACING = 120;
 const ENEMY_MOVE_DOWN = 20;
+const ENEMY_START_Y = 20;
 
 // Game state
 let canvas, ctx;
@@ -175,7 +176,7 @@ function startGame() {
 function createEnemies() {
     enemies = [];
     const startX = (CANVAS_WIDTH - (ENEMIES_PER_ROW * ENEMY_SPACING)) / 2;
-    const startY = 50;
+    const startY = ENEMY_START_Y;
     
     for (let row = 0; row < ENEMY_ROWS; row++) {
         for (let col = 0; col < ENEMIES_PER_ROW; col++) {
