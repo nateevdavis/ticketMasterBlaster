@@ -1,15 +1,15 @@
 // Game constants
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
-const PLAYER_WIDTH = 50;
-const PLAYER_HEIGHT = 50;
-const ENEMY_WIDTH = 40;
-const ENEMY_HEIGHT = 40;
-const PROJECTILE_WIDTH = 5;
-const PROJECTILE_HEIGHT = 15;
+const PLAYER_WIDTH = 100;
+const PLAYER_HEIGHT = 100;
+const ENEMY_WIDTH = 80;
+const ENEMY_HEIGHT = 80;
+const PROJECTILE_WIDTH = 15;
+const PROJECTILE_HEIGHT = 45;
 const ENEMY_ROWS = 4;
 const ENEMIES_PER_ROW = 8;
-const ENEMY_SPACING = 60;
+const ENEMY_SPACING = 100;
 const ENEMY_MOVE_DOWN = 20;
 
 // Game state
