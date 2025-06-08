@@ -7,16 +7,16 @@ const ENEMY_WIDTH = 80;
 const ENEMY_HEIGHT = 80;
 const PROJECTILE_WIDTH = 15;
 const PROJECTILE_HEIGHT = 45;
-const ENEMY_ROWS = 4;
-const ENEMIES_PER_ROW = 8;
-const ENEMY_SPACING = 100;
+const ENEMY_ROWS = 3;
+const ENEMIES_PER_ROW = 6;
+const ENEMY_SPACING = 120;
 const ENEMY_MOVE_DOWN = 20;
 
 // Game state
 let canvas, ctx;
 let player = {
     x: CANVAS_WIDTH / 2 - PLAYER_WIDTH / 2,
-    y: CANVAS_HEIGHT - PLAYER_HEIGHT - 10,
+    y: CANVAS_HEIGHT - PLAYER_HEIGHT - 20,
     width: PLAYER_WIDTH,
     height: PLAYER_HEIGHT,
     speed: 5
@@ -174,11 +174,14 @@ function startGame() {
 // Create enemy grid
 function createEnemies() {
     enemies = [];
+    const startX = (CANVAS_WIDTH - (ENEMIES_PER_ROW * ENEMY_SPACING)) / 2;
+    const startY = 50;
+    
     for (let row = 0; row < ENEMY_ROWS; row++) {
         for (let col = 0; col < ENEMIES_PER_ROW; col++) {
             enemies.push({
-                x: col * ENEMY_SPACING + 50,
-                y: row * ENEMY_SPACING + 50,
+                x: startX + (col * ENEMY_SPACING),
+                y: startY + (row * ENEMY_SPACING),
                 width: ENEMY_WIDTH,
                 height: ENEMY_HEIGHT,
                 direction: 1
@@ -254,7 +257,7 @@ function update() {
         enemy.x += enemy.direction * 2;
     });
 
-    // Check collisions
+    // Check collisions with a smaller hitbox
     projectiles.forEach((projectile, pIndex) => {
         enemies.forEach((enemy, eIndex) => {
             if (checkCollision(projectile, enemy)) {
@@ -266,9 +269,9 @@ function update() {
         });
     });
 
-    // Check if enemies reached bottom
+    // Check if enemies reached bottom with adjusted collision
     enemies.forEach(enemy => {
-        if (enemy.y + enemy.height >= player.y) {
+        if (enemy.y + enemy.height >= player.y + 20) {
             endGame();
         }
     });
@@ -279,12 +282,27 @@ function update() {
     }
 }
 
-// Check collision between two objects
+// Check collision between two objects with adjusted hitboxes
 function checkCollision(obj1, obj2) {
-    return obj1.x < obj2.x + obj2.width &&
-           obj1.x + obj1.width > obj2.x &&
-           obj1.y < obj2.y + obj2.height &&
-           obj1.y + obj1.height > obj2.y;
+    // Create smaller hitboxes for more precise collision
+    const hitbox1 = {
+        x: obj1.x + obj1.width * 0.2,
+        y: obj1.y + obj1.height * 0.2,
+        width: obj1.width * 0.6,
+        height: obj1.height * 0.6
+    };
+    
+    const hitbox2 = {
+        x: obj2.x + obj2.width * 0.2,
+        y: obj2.y + obj2.height * 0.2,
+        width: obj2.width * 0.6,
+        height: obj2.height * 0.6
+    };
+
+    return hitbox1.x < hitbox2.x + hitbox2.width &&
+           hitbox1.x + hitbox1.width > hitbox2.x &&
+           hitbox1.y < hitbox2.y + hitbox2.height &&
+           hitbox1.y + hitbox1.height > hitbox2.y;
 }
 
 // End game
